@@ -1,0 +1,19 @@
+{%extends 'base_generic.html'%}
+{% load static %}
+{%block content%}
+    <!-- conteudo (bloco do meio) -->
+    <div class="container d-flex justify-content-center align-items-center login-page">
+        <div class="login-container">
+            <h2 class="login-title">Enviar e-mail</h2>
+            <div class="login-icon">
+            </div>
+            
+            <form>
+                <input type="email" class="form-control" placeholder="Email">
+                <input type="password" class="form-control" placeholder="Senha">
+                <input type="description" class="form-control" placeholder="Descriçao">
+                <button type="button" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+{%endblock%}
