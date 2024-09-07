@@ -18,9 +18,10 @@
                     <span class="navbar-title"> Gerenciamento de Estoque</span>
                 </a>
                 <div class="d-flex">
-                    <a class="nav-link" href="#">Cadastro</a>
-                    <a class="nav-link" href="#">Movimentação</a>
-                    <a class="nav-link" href="#">Controle</a>
+                    <a class="nav-link" href="{% url 'cadastro_funcionario' %}">Cadastro de Funcionário (teste)</a>
+                    <a class="nav-link" href="{% url 'envio_email' %}">Envio de email</a>
+                    <a class="nav-link" href="#">teste</a>
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                 </div>
                 <img src="{% static '/images/icon.png' %}" alt="Profile Icon" class="profile-icon" width="50" height="50">
             </div>
