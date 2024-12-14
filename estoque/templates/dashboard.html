@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if user.is_superuser  %}
-   <div>
+   <div class="container">
         <div class="container-center">
             <div style="padding: 10px 0px 10px 0px; color: #ff5b0f;">
                 <h3>Bem-vindo(a), gerente {{ request.user.first_name }}</h3>
@@ -45,7 +45,7 @@
   </div>
 {%else%}
 <div>
-    <div class="container-center">
+    <div class="container">
         <div style="padding: 10px 0px 10px 0px; color: #ff5b0f;">
             <h3>Bem-vindo(a), funcionário {{ request.user.first_name }}</h3>
         </div>

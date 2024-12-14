@@ -10,12 +10,15 @@
             <img src="{% static '/images/profile.png' %}" alt="User Icon">
         </div>
         <h2 class="login-title">Login</h2>
-        <form class="form-control" action="{% url 'login' %}" method="post">
+        <form class="" action="{% url 'login' %}" method="post">
             {% csrf_token %}
-            <input name='username' type="text" placeholder="Nome de usuário">
-            <input name='password' type="password" placeholder="Senha">
-            <input class="btn btn-primary mt-2 p-2" type="submit" value="Login"/>
-            <input class="btn btn-primary mt-2 p-2" type="Reset" value="Limpar"/>
+            <div class="form-control mb-0">
+                <input class="mb-1 form-control rounded-pill" name='username' type="text" placeholder="Nome de usuário">
+                <input class="mb-1 form-control rounded-pill" name='password' name='password' type="password" placeholder="Senha">
+            </div>
+            <input class="btn btn-primary mt-2 rounded-pill px-5" type="submit" value="Login"/>
+            <br>
+            <input class="btn btn-outline-primary mt-2 rounded-pill" type="Reset" value="Limpar"/>
         </form>
         <!-- <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}

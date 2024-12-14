@@ -11,7 +11,7 @@
                 <input name='nome' type="text" class="form-control" placeholder="Nome">
                 <input name='email' type="email" class="form-control" placeholder="Email">
                 <input name='senha' type="password" class="form-control" placeholder="Senha">
-                <button  action="{% url 'cadastro_funcionario' %}" type="submit" class="btn btn-primary">Enviar</button>
+                <button  action="{% url 'cadastro_funcionario' %}" type="submit" class="btn btn-primary rounded-pill w-100">Enviar</button>
                 {% csrf_token %}
             </form>
         </div>

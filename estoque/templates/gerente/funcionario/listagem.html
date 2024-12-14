@@ -2,22 +2,20 @@
 {% load static %}
 {% block content %}
     <div>
-        <div class="container-center">
-            <div class="search-bar shadow-sm">
+        <div class="container">
+            <div class="search-bar">
                 <input type="text" class="form-control" placeholder="Buscar funcionário">
-                <i class="bi bi-search"></i>
             </div>
 
             <div class="table-container">
                 <table class="table custom-table">
                     <thead>
                         <tr>
-                            <th>Nome</th>
-                            <th>Função</th>
-                            <th>E-mail</th>
-                            <th style="width: 50px;">Editar</th>
-                            <th style="width: 50px;">Excluir</th>
-                            
+                            <th style="color: #ff5b0f;">Nome</th>
+                            <th style="color: #ff5b0f;">Função</th>
+                            <th style="color: #ff5b0f;">E-mail</th>
+                            <th style="width: 50px; color: #ff5b0f;">Editar</th>
+                            <th style="width: 50px; color: #ff5b0f;">Excluir</th>
                         </tr>
                     </thead>
                     {% for item in funcionarios %}

@@ -2,11 +2,8 @@
 {%extends 'base_generic.html'%}
 {% load static %}
 {%block content%}
-<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="login-container shadow">
-        <div class="text-center mb-4">
-            <i class="bi bi-box-seam fs-1" style="color: #402ec9;"></i>
-        </div>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="login-container">
         <h2 class="login-title text-center form-header mb-4">Cadastro de Movimentação</h2>
         <form method="post">
             <div class="mb-3">
@@ -30,7 +27,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <button type="submit" action="{% url 'cadastro_movimentacao' %}" class="btn btn-submit w-100 rounded-pill">Enviar</button>
+            <button type="submit" action="{% url 'cadastro_movimentacao' %}" class="btn btn-primary btn-submit w-100 rounded-pill">Enviar</button>
             {% csrf_token %}
         </form>
     </div>
