@@ -9,29 +9,37 @@ from .decorators import gerente_required
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib
+from django.contrib.auth.hashers import check_password
 
 @login_required
 def logout_view(request):
     logout(request)
     return redirect('accounts/login')
     
-#Tentando fazer a manivela mas nn tá dando certo
 def login_view(request):
     if request.method == 'POST':
         username = request.POST["username"]
         password = request.POST["password"]
         usuario = Usuario.objects.filter(username=username).first()
-        print(usuario)
-        print(usuario.is_anonymous)
-        print(usuario.is_authenticated)
-        print(usuario.is_active)
-        print(usuario._meta)
-        user = authenticate(request, username=username, password=password)
-        login(request, user)
+        # print(usuario)
+        # print(usuario.is_anonymous)
+        # print(usuario.is_authenticated)
+        # print(usuario.is_active)
+        # print(usuario._meta)
+        # is_valid = check_password(password, usuario.password)
+        # print(is_valid)
+        if usuario: 
+            if usuario.check_password(password):
+                print('senha checada')
+                login(request, usuario)
+            else:
+                print('erro na checagem de senha')
+        else:
+            print('usuário não encontrado')
         return redirect('/')
     else:
         return render(request, 'registration/login.html')
-    return redirect('/')
+    
 
 # Dashboard
 @login_required
@@ -39,12 +47,11 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 # Cadastro de funcionário
-#@login_required
 @gerente_required
 @login_required
 def cadastro_funcionario(request):
-    
     if request.method == "POST":
+        print(request.POST['senha'])
         nome = request.POST['nome']
         email = request.POST['email']
         senha = request.POST['senha']
@@ -52,11 +59,11 @@ def cadastro_funcionario(request):
         novo_funcionario = Usuario.objects.create_user(
             username=nome,
             email=email,
-            password=senha,
             usu_tipo=Usuario.FUNCIONARIO,
             usu_ger_id=Usuario.objects.filter(id=request.user.id).first()
 
         )
+        novo_funcionario.set_password(senha)
         novo_funcionario.save()
         return redirect('listagem_funcionario')
     
@@ -66,6 +73,7 @@ def cadastro_funcionario(request):
 @gerente_required
 @login_required
 def listagem_funcionario(request):
+    
     funcionarios = Usuario.objects.filter(usu_tipo=Usuario.FUNCIONARIO)
     return render(request, 'gerente/funcionario/listagem.html', {'funcionarios': funcionarios})
 
@@ -78,8 +86,6 @@ def edicao_funcionario(request, id):
     if request.method == "POST":
         column = request.POST.get('column')
         value = request.POST.get('value')
-
-        # verifica se column está entre as colunas de movimentações
         if column in [field.name for field in Usuario._meta.get_fields()]:
             setattr(funcionario,column,value)
         funcionario.save()
@@ -91,6 +97,7 @@ def edicao_funcionario(request, id):
 @gerente_required
 @login_required
 def exclusao_funcionario(request, id):
+    
     funcionario = get_object_or_404(Usuario, id=id)
     funcionario.delete()
     return redirect('listagem_funcionario')
@@ -107,17 +114,18 @@ def cadastro_fornecedor(request):
         ger_id = Usuario.objects.filter(id=request.POST['ger_id']).first()
         
         
-        novo_fornecedor = Fornecedor.objects.create(
+        Fornecedor.objects.create(
             for_nome=nome,
             for_contato=contato,
             for_email=email,
             for_ger_id=ger_id
         )
+
         messages.success(request, "Fornecedor cadastrado com sucesso!")
         return redirect('listagem_fornecedor')
     
     return render(request, 'gerente/fornecedor/cadastro.html')
-
+  
 #listagem de fornecedores
 @gerente_required
 @login_required
@@ -154,7 +162,6 @@ def exclusao_fornecedor(request, id):
     return redirect('listagem_fornecedor')
 
 # Cadastro de produto.
-@gerente_required
 @login_required
 def cadastro_produto(request):
     
@@ -170,7 +177,7 @@ def cadastro_produto(request):
         local = request.POST['local']
         fornecedor = Fornecedor.objects.filter(for_id=request.POST['fornecedor']).first()
         
-        novo_produto = Produto.objects.create(
+        Produto.objects.create(
             pro_nome=nome,
             pro_quantidade=1,
             pro_codigo=codigo,
@@ -184,6 +191,7 @@ def cadastro_produto(request):
             pro_for_id=fornecedor,
             pro_usu_id=Usuario.objects.filter(id=request.user.id).first()
         )
+
         messages.success(request, "Produto cadastrado com sucesso!")
         return redirect('listagem_produto')
     
@@ -196,8 +204,8 @@ def listagem_produto(request):
     produtos = Produto.objects.all()
     return render(request, 'produto/listagem.html', {'produtos': produtos})
 
+    
 # Edição de produto
-@gerente_required
 @login_required
 def edicao_produto(request, id):
     
@@ -206,7 +214,6 @@ def edicao_produto(request, id):
         column = request.POST.get('column')
         value = request.POST.get('value')
 
-        # verifica se column está entre as colunas de produto
         if column in [field.name for field in Produto._meta.get_fields()]:
             setattr(produto,column,value)
 
@@ -216,7 +223,6 @@ def edicao_produto(request, id):
     return render(request, 'produto/edicao.html', {'produto': produto})
 
 # Exclusão de produto
-@gerente_required
 @login_required
 def exclusao_produto(request, id):
     
@@ -225,7 +231,6 @@ def exclusao_produto(request, id):
     return redirect('listagem_produto')
 
 # Cadastro de movimentacao
-@gerente_required
 @login_required
 def cadastro_movimentacao(request):
     
@@ -247,16 +252,14 @@ def cadastro_movimentacao(request):
         return redirect('listagem_movimentacao')
     produtos = Produto.objects.all()
     return render(request, 'produto/movimentacao/cadastro.html', {'produtos':produtos})
-
+  
 # Listagem das movimentacoes
-@gerente_required
 @login_required
 def listagem_movimentacao(request):
     movimentacoes = Movimentacao.objects.all()
     return render(request, 'produto/movimentacao/listagem.html', {'movimentacoes': movimentacoes})
 
 # Edição de movimentacao
-@gerente_required
 @login_required
 def edicao_movimentacao(request, id):
     
@@ -265,7 +268,6 @@ def edicao_movimentacao(request, id):
         column = request.POST.get('column')
         value = request.POST.get('value')
 
-        # verifica se column está entre as colunas de movimentações
         if column in [field.name for field in Movimentacao._meta.get_fields()]:
             setattr(movimentacao,column,value)
         movimentacao.save()
@@ -273,9 +275,7 @@ def edicao_movimentacao(request, id):
 
     return render(request, 'produto/movimentacao/edicao.html', {'movimentacao': movimentacao})
 
-#teste
 # Exclusão de movimentacao
-@gerente_required
 @login_required
 def exclusao_movimentacao(request, id):
     
@@ -300,9 +300,8 @@ def envio_email(request):
         message["Subject"] = 'Email da empresa'
         message.attach(MIMEText(mensagem, "plain"))
         try:
-        
             server = smtplib.SMTP(smtp_server, smtp_port)
-            server.starttls() 
+            server.starttls()
             server.login(email_usuario, email_senha)
             server.sendmail(email_usuario, destinatario, message.as_string())
             print("E-mail enviado com sucesso!")
