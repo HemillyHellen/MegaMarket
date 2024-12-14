@@ -1,0 +1,24 @@
+{%extends 'base_generic.html'%}
+{% load static %}
+{%block content%}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="login-container shadow">
+        <div class="text-center mb-4">
+            <i class="bi bi-box-seam fs-1" style="color: #402ec9;"></i>
+        </div>
+        <h2 class="login-title text-center form-header mb-4">Cadastro de Fornecedores</h2>
+        <form method="POST">
+            <label for="campo">Selecione o campo:</label>
+                <select name="column" id="campo">
+                    <option value="mov_tipo">Nome</option>
+                    <option value="email">E-mail</option>
+                </select>
+            <label for="campo2">Insira o novo valor:</label>
+            <input name="value" id="campo2">
+            <button action='{% url "edicao_movimentacao" movimentacao.mov_id %}' type="submit" class="btn btn-submit w-100 rounded-pill">Enviar</button>
+            {% csrf_token %}
+        </form>
+    </div>
+</div>
+
+{%endblock%}

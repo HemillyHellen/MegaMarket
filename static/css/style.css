@@ -87,15 +87,37 @@ body {
     font-weight: bold;
 }
 
-.footer {
-    background-color: #7b66d6;
-    height: 50px;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-}
 
 #align{
     display: flex;
     justify-content: space-between;
+}
+
+.card {
+    font-weight: bold;
+    background-color: #402ec9;
+    color: white;
+    border-radius: 30px;
+}
+ul {
+    margin-left: 10px;
+}
+a {
+    color: white;
+}
+a:hover, .active {
+    color: #ff5b0f;
+}
+.footer {
+    background-color: #aea3e1;
+    height: 50px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cor_botao {
+    background-color: #aea3e1;
 }

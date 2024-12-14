@@ -1,0 +1,39 @@
+
+{%extends 'base_generic.html'%}
+{% load static %}
+{%block content%}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="login-container shadow">
+        <div class="text-center mb-4">
+            <i class="bi bi-box-seam fs-1" style="color: #402ec9;"></i>
+        </div>
+        <h2 class="login-title text-center form-header mb-4">Cadastro de Movimentação</h2>
+        <form method="post">
+            <div class="mb-3">
+                <input name="quantidade" type="text" class="form-control rounded-pill" placeholder="Quantidade">
+            </div>
+            <div class="mb-3">
+                <input name='data' type="date" class="form-control rounded-pill" placeholder="Data">
+            </div>
+            <div class="mb-3"> 
+                <label for="tipo">Tipo:</label>
+                <select name="tipo" id="tipo">
+                    <option value="entrada">Entrada</option>
+                    <option value="saida">Saída</option>
+                </select>
+            </div>
+            <div class="mb-3"> 
+                <label for="pro_id">Produto:</label>
+                <select name="pro_id" id="pro_id">
+                    {% for item in produtos %}
+                        <option value="{{item.pro_id}}">{{item.pro_nome}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" action="{% url 'cadastro_movimentacao' %}" class="btn btn-submit w-100 rounded-pill">Enviar</button>
+            {% csrf_token %}
+        </form>
+    </div>
+</div>
+
+{%endblock%}

@@ -58,7 +58,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +70,8 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [ 'django.contrib.auth.backends.ModelBackend', ]#'estoque.views',
 
 WSGI_APPLICATION = 'MegaMarket.wsgi.application'
 

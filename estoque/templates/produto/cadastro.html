@@ -1,5 +1,52 @@
 {%extends 'base_generic.html'%}
 {% load static %}
 {%block content%}
-    <!-- conteudo (bloco do meio) -->
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="login-container shadow">
+        <div class="text-center mb-4">
+            <i class="bi bi-box-seam fs-1" style="color: #402ec9;"></i>
+        </div>
+        <h2 class="login-titletext-center form-header mb-4">Cadastro de Produto</h2>
+        <form method="post">
+            <div class="mb-3">
+                <input name='nome' type="text" class="form-control rounded-pill" placeholder="Nome">
+            </div>
+            <div class="mb-3">
+                <input name='codigo' type="text" class="form-control rounded-pill" placeholder="Código de Barra">
+            </div>
+            <div class="mb-3">
+                <input name='descricao' type="text" class="form-control rounded-pill" placeholder="Descrição">
+            </div>
+            <div class="mb-3">
+                <input name='categoria' type="text" class="form-control rounded-pill" placeholder="Categoria">
+            </div>
+            <div class="mb-3">
+                <input name='qtdMinima' type="text" class="form-control rounded-pill" placeholder="Quantidade Mínima">
+            </div>
+            <div class="mb-3"> 
+                <input name='precoCompra' type="text" class="form-control rounded-pill" placeholder="Preço de Compra">
+            </div>
+            <div class="mb-3"> 
+                <input name='precoVenda' type="text" class="form-control rounded-pill" placeholder="Preço de Venda">
+            </div>
+            <div class="mb-3"> 
+                <input name='prazoValidade' type="date" class="form-control rounded-pill" placeholder="Prazo de Validade">
+            </div>
+            <div class="mb-3"> 
+                <input name='local' type="text" class="form-control rounded-pill" placeholder="Local">
+            </div>
+            <div class="mb-3"> 
+                <label for="select">Fornecedor:</label>
+                <select name="fornecedor" id="select">
+                    {% for item in fornecedores %}
+                        <option value="{{item.for_id}}">{{item.for_nome}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button action='{% url "cadastro_produto" %}' type="submit" class="btn btn-submit w-100 rounded-pill">Enviar</button>
+            {% csrf_token %}
+        </form>
+    </div>
+</div>
+
 {%endblock%}

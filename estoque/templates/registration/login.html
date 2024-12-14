@@ -1,0 +1,28 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div class="container d-flex justify-content-center align-items-center login-page">
+    <div class="login-container">
+        <div class="login-icon">
+            <img src="{% static '/images/profile.png' %}" alt="User Icon">
+        </div>
+        <h2 class="login-title">Login</h2>
+        <form class="form-control" action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <input name='username' type="text" placeholder="Nome de usuário">
+            <input name='password' type="password" placeholder="Senha">
+            <input class="btn btn-primary mt-2 p-2" type="submit" value="Login"/>
+            <input class="btn btn-primary mt-2 p-2" type="Reset" value="Limpar"/>
+        </form>
+        <!-- <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <input type="email" name="email" class="form-control" placeholder="Email">
+            <input type="password" name="senha" class="form-control" placeholder="Senha">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form> -->
+    </div>
+</div>
+{% endblock %}

@@ -1,18 +1,23 @@
 {%extends 'base_generic.html'%}
 {% load static %}
 {%block content%}
-    <!-- conteudo (bloco do meio) -->
     <div class="container d-flex justify-content-center align-items-center login-page">
         <div class="login-container">
             <h2 class="login-title">Enviar e-mail</h2>
             <div class="login-icon">
             </div>
             
-            <form>
-                <input type="email" class="form-control" placeholder="Email">
-                <input type="password" class="form-control" placeholder="Senha">
-                <input type="description" class="form-control" placeholder="Descriçao">
-                <button type="button" class="btn btn-primary">Enviar</button>
+            <form method="post">
+                <label for="campo">Selecione para quem você quer enviar o email:</label>
+                <select name="email" id="campo">
+                    {% for item in users %}
+                        <option value="{{item.email}}">{{item.username}}</option>
+                    {% endfor %}
+                </select></br>
+                <label for="campo2">Insira o conteúdo do email:</label>
+                <input name='descricao' id="campo2" type="description" class="form-control" placeholder="Descriçao">
+                <button type="submit" action="{% url 'envio_email' %}" class="btn btn-primary">Enviar</button>
+                {% csrf_token %}
             </form>
         </div>
     </div>

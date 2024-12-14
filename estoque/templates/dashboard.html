@@ -1,0 +1,83 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block content %}
+
+{% if user.is_superuser  %}
+   <div>
+        <div class="container-center">
+            <div style="padding: 10px 0px 10px 0px; color: #ff5b0f;">
+                <h3>Bem-vindo(a), gerente {{ request.user.first_name }}</h3>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" style="margin-right: 0px;">
+                    <div class="card" style="width: 100%">
+                        <div class="card-body">
+                          <h5 class="card-title">Relatório</h5>
+                          <li class="card-link"><a href="#">Gerar relatório de estoque</a></li>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="card" style="width: 100%">
+                        <div class="card-body" style="display: flex;">
+                            <div><img src="./1.png" alt="" style="width: 50px;"></div>
+                            <h5 class="card-title" style="padding: 10px;"><a href="{% url 'envio_email' %}">Enviar e-mail</a></h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 pr-0" style="margin-right: 0px !important;">
+                    <div class="card" style="height: 100%;">
+                        <div class="card-body">
+                          <h5 class="card-title">Alertas</h5>
+                          <ul>
+                            <li><a href="#">Alerta 1</a></li>
+                            <li><a href="#">Alerta 2</a></li>
+                            <li><a href="#">Alerta 3</a></li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+  </div>
+{%else%}
+<div>
+    <div class="container-center">
+        <div style="padding: 10px 0px 10px 0px; color: #ff5b0f;">
+            <h3>Bem-vindo(a), funcionário {{ request.user.first_name }}</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                    <div class="card" style="width: 100%; height: 100%;">
+                        <div class="card-body">
+                          <h5 class="card-title">Alertas</h5>
+                          <ul>
+                            <li><a href="#">Alerta 1</a></li>
+                            <li><a href="#">Alerta 2</a></li>
+                            <li><a href="#">Alerta 3</a></li>
+                          </ul>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card" style="width: 100%">
+                    <div class="card-body" style="display: flex;">
+                        <div><img src="./1.png" alt="" style="width: 50px;"></div>
+                        <h5 class="card-title" style="padding: 10px;"><a href="{% url 'envio_email' %}">Enviar e-mail</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+</div>
+
+<footer class="footer d-flex justify-content-center align-items-center ">
+    <p class="text-white mb-0"></p>
+{%endif%}
+
+{% endblock %}

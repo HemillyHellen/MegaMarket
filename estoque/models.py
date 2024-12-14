@@ -12,6 +12,11 @@ class Usuario(AbstractUser):
     usu_tipo = models.CharField(max_length=20, choices=TIPOS_USUARIO)
     usu_ger_id = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='funcionarios')
 
+    def save(self, *args, **kwargs):
+        if self.pk is None and not self.is_superuser:
+            self.set_password(self.password)  
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f'{self.username} ({self.get_usu_tipo_display()})'
 
@@ -26,7 +31,7 @@ class Produto(models.Model):
     pro_id = models.AutoField(primary_key=True)
     pro_nome = models.CharField(max_length=255)
     pro_quantidade = models.IntegerField()
-    pro_codigo = models.CharField(max_length=255)
+    pro_codigo = models.CharField(max_length=255, unique=True)
     pro_descricao = models.TextField()
     pro_categoria = models.CharField(max_length=255)
     pro_precoCompra = models.DecimalField(max_digits=10, decimal_places=2)

@@ -1,0 +1,38 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block content %}
+    <div>
+        <div class="container-center">
+            <div class="search-bar shadow-sm">
+                <input type="text" class="form-control" placeholder="Buscar fornecedor">
+                <i class="bi bi-search"></i>
+            </div>
+
+            <div class="table-container">
+                <table class="table custom-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Contato</th>
+                            <th>E-mail</th>
+                            <th style="width: 50px;">Editar</th>
+                            <th style="width: 50px;">Excluir</th>
+                            
+                        </tr>
+                    </thead>
+                    {% for item in fornecedores %}
+                        <tbody>
+                            <tr>
+                                <td>{{item.for_nome}}</td>
+                                <td>{{item.for_contato}}</td>
+                                <td>{{item.for_email}}</td>
+                                <td><a href="{% url 'edicao_fornecedor' item.for_id %}"  style='color:red'><i class="bi bi-pencil-square">Editar</i></a></td>
+                                <td><a href="{% url 'exclusao_fornecedor' item.for_id %}" style='color:red'><i class="bi bi-trash">Excluir</i></a></td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
