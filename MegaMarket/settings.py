@@ -25,6 +25,8 @@ SECRET_KEY = 'django-insecure-jz-&!(6n7og@***jq6_&x29j3nzj$qaj(wdnkc=n75g*tu@iu#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 ALLOWED_HOSTS = []
 
 
@@ -40,6 +42,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     "crispy_bootstrap4",
     'estoque',
+
+    
 ]
 
 MIDDLEWARE = [
@@ -58,7 +62,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = [ 'django.contrib.auth.backends.ModelBackend', ]#'estoque.views',
+AUTHENTICATION_BACKENDS = [ 'django.contrib.auth.backends.ModelBackend', ]
 
 WSGI_APPLICATION = 'MegaMarket.wsgi.application'
 

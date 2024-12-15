@@ -3,25 +3,27 @@
 {% block content %}
     <div>
         <div class="container">
-            <div class="search-bar">
+            <div class="search-bar -sm">
                 <input type="text" class="form-control" placeholder="Buscar Produto">
+                <i class="bi bi-search"></i>
             </div>
 
             <div class="table-container">
                 <table class="table custom-table">
                     <thead>
                         <tr>
-                            <th style="color: #ff5b0f;">Nome</th>
-                            <th style="color: #ff5b0f;">Código de Barras</th>
-                            <th style="color: #ff5b0f;">Descrição</th>
-                            <th style="color: #ff5b0f;">Categoria</th>
-                            <th style="color: #ff5b0f;">Fornecedor</th>
-                            <th style="color: #ff5b0f;">Preço de Compra</th>
-                            <th style="color: #ff5b0f;">Preço de Venda</th>
-                            <th style="color: #ff5b0f;">Prazo de Validade</th>
-                            <th style="color: #ff5b0f;">Quantidade</th>
-                            <th style="color: #ff5b0f;">Editar</th>
-                            <th style="color: #ff5b0f;">Excluir</th> 
+                            <th style='color:#ff5b0f'>Nome</th>
+                            <th style='color:#ff5b0f'>Código de Barras</th>
+                            <th style='color:#ff5b0f'>Descrição</th>
+                            <th style='color:#ff5b0f'>Categoria</th>
+                            <th style='color:#ff5b0f'>Fornecedor</th>
+                            <th style='color:#ff5b0f'>Preço de Compra</th>
+                            <th style='color:#ff5b0f'>Preço de Venda</th>
+                            <th style='color:#ff5b0f'>Prazo de Validade</th>
+                            <th style='color:#ff5b0f'>Quantidade</th>
+                            <th style='color:#ff5b0f'>Quantidade Mínima</th>
+                            <th style='color:#ff5b0f'>Editar</th>
+                            <th style='color:#ff5b0f'>Excluir</th> 
                         </tr>
                     </thead>
                     {% for item in produtos %}
@@ -36,12 +38,17 @@
                                 <td>{{item.pro_precoVenda}}</td>
                                 <td>{{item.pro_prazoValidade}}</td>
                                 <td>{{item.pro_quantidade}}</td>
+                                <td>{{item.pro_qtdMinima}}</td>
                                 <td><a href="{% url 'edicao_produto' item.pro_id %}" style='color:red'><i class="bi bi-pencil-square">Editar</i></a></td>
                                 <td><a href="{% url 'exclusao_produto' item.pro_id %}" style='color:red'><i class="bi bi-trash">Excluir</i></a></td>
                             </tr>
                         </tbody>
                     {% endfor %}
                 </table>
+            </div>
+            
+            <div class="d-flex justify-content-center">
+                <a href="{% url 'relatorio_produtos' %}" class="btn bg-success text-white">Gerar Relatório PDF</a>
             </div>
         </div>
     </div>

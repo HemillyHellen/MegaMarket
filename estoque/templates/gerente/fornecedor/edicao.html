@@ -2,19 +2,20 @@
 {% load static %}
 {%block content%}
 <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="login-container shadow">
-        <h2 class="login-title text-center form-header mb-2">Edição de Fornecedor</h2>
+    <div class="login-container m-0 shadow">
+        <div class="login-icon">
+            <img src="{% static '/images/profile.png' %}" alt="User Icon">
+        </div>
+        <h2 class="login-title text-center form-header mb-4">Edição de Fornecedores</h2>
         <form method="POST">
             <label for="campo">Selecione o campo:</label>
-                <select name="column" id="campo">
-                    <option value="for_nome">Nome</option>
-                    <option value="for_contato">Contato</option>
-                    <option value="for_email">E-mail</option>
-                </select>
-            <div class="mb-2">
-                <label for="campo2">Insira o novo valor:</label>
-                <input name="value" id="campo2">
-            </div>
+            <select class="form-select-sm" name="column" id="campo">
+                <option value="for_nome">Nome</option>
+                <option value="for_contato">Contato</option>
+                <option value="for_email">E-mail</option>
+            </select>
+            <label for="campo2">Insira o novo valor:</label>
+            <input name="value" class='mb-2' id="campo2">
             <button action='{% url "edicao_fornecedor" fornecedor.for_id %}' type="submit" class="btn btn-primary btn-submit w-100 rounded-pill">Enviar</button>
             {% csrf_token %}
         </form>

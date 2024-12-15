@@ -1,12 +1,31 @@
 {%extends 'base_generic.html'%}
 {% load static %}
 {%block content%}
+<script>
+    function formController(){
+        if (document.getElementById('seletor').value == 'pro_for_id') {
+            document.getElementById('fornecedor').style.display = 'block'
+            document.getElementById('input').style.display = 'none'
+            document.getElementById('fornecedor').disabled = false
+            document.getElementById('input').disabled = true
+        } else {
+            document.getElementById('fornecedor').style.display = 'none'
+            document.getElementById('input').style.display = 'block'
+            document.getElementById('fornecedor').disabled = true
+            document.getElementById('input').disabled = false
+            if (document.getElementById('seletor').value == 'pro_prazoValidade') {
+                document.getElementById('input').type = 'date'
+            }
+        }
+    }
+</script>
+
 <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="login-container shadow">
-        <h2 class="login-title text-center form-header mb-2">Edição de Produto</h2>
-        <form method="POST">
+    <div class="login-container shadow m-0">
+        <h2 class="login-title text-center form-header mb-4">Edição de Produtos</h2>
+        <form style='display: flex;flex-direction: column;align-items: center;' method="POST">
             <label for="campo">Selecione o campo:</label>
-                <select name="column" id="campo">
+                <select class='form-select-sm' onchange="formController()" id='seletor' name="column" id="campo">
                     <option value="pro_nome">Nome</option>
                     <option value="pro_codigo">Código de Barras</option>
                     <option value="pro_descricao">Descrição</option>
@@ -16,15 +35,23 @@
                     <option value="pro_precoVenda">Preço de Venda</option>
                     <option value="pro_prazoValidade">Prazo de Validade</option>
                     <option value="pro_quantidade">Quantidade</option>
+                    <option value="pro_qtdMinima">Quantidade Mínima</option>
                 </select>
-                <div class="mb-2">
-                    <label for="campo2">Insira o novo valor:</label>
-                    <input name="value" id="campo2">
-                </div>
-            <button action='{% url "edicao_produto" produto.pro_id %}' type="submit" class="btn btn-primary btn-submit w-100 rounded-pill">Enviar</button>
+                
+            <label>Insira o novo valor:</label>
+            
+            <select class='form-select-sm mb-2' id='fornecedor' name="value" style="display:none" disabled>
+                {% for item in fornecedores %}
+                    <option value="{{item.for_id}}">{{item.for_nome}}</option>
+                {% endfor %}
+            </select>
+            
+            <input id='input' class='mb-2' name="value">
+            <button action='{% url "edicao_produto" produto.pro_id %}' type="submit" class="btn btn-primary w-100 rounded-pill">Enviar</button>
             {% csrf_token %}
         </form>
     </div>
 </div>
+
 
 {%endblock%}

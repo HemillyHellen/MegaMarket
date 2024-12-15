@@ -3,19 +3,20 @@
 {% load static %}
 {%block content%}
 <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="login-container shadow">
-        <h2 class="login-title text-center form-header mb-2">Edição de Funcionário</h2>
+    <div class="login-container shadow m-0">
+        <div class="login-icon">
+            <img src="{% static '/images/profile.png' %}" alt="User Icon">
+        </div>
+        <h2 class="login-title text-center form-header mb-4">Edição de Funcionário</h2>
         <form method="POST">
             <label for="campo">Selecione o campo:</label>
-                <select name="column" id="campo">
+                <select  class='form-select-sm'  class='form-select-sm' name="column" id="campo">
                     <option value="username">Nome</option>
                     <option value="email">E-mail</option>
                 </select>
-                <div class="mb-2">
-                    <label for="campo2">Insira o novo valor:</label>
-                    <input name="value" id="campo2">
-                </div>
-            <button action='{% url "edicao_funcionario" funcionario.id %}' type="submit" class="btn btn-primary btn-submit w-100 rounded-pill">Enviar</button>
+            <label for="campo2">Insira o novo valor:</label>
+            <input name="value" class='mb-2' id="campo2">
+            <button action='{% url "edicao_funcionario" funcionario.id %}' type="submit" class="btn btn-primary w-100 rounded-pill">Enviar</button>
             {% csrf_token %}
         </form>
     </div>

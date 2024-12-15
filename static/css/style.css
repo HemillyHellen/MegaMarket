@@ -4,7 +4,6 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
 }
-
 .custom-navbar {
     background-color: #ffffff;
     padding: 0.5rem 2rem;
@@ -15,15 +14,20 @@ body {
     border-bottom: 2px solid #7b66d6;
 }
 
+.navbar-title {
+    color: #343a40;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+.nav-link:hover,.active {
+    color: #402ec9;
+}
 .nav-link {
     color: #FF6600;
     margin: 0 1rem;
     font-weight: bold;
     text-decoration: none;
-}
-
-.nav-link:hover, .active {
-    color: #402ec9;
 }
 
 .profile-icon {
@@ -46,10 +50,10 @@ body {
     border: 2px solid #ff6600;
     border-radius: 15px;
     padding: 2rem;
+    margin-top: 50px;
     text-align: center;
     width: 100%;
     max-width: 400px;
-    margin-top: 20px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -108,13 +112,19 @@ a:hover, .active {
 .footer {
     background-color: #402ec9;
     height: 50px;
-    position: fixed;
-    bottom: 0;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.cor_botao {
-    background-color: #aea3e1;
+.basebody{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 100vw;
+    justify-content: space-between;
+}
+
+.row{
+    margin: 0px !important;
 }

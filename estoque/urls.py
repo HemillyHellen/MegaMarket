@@ -39,7 +39,14 @@ urlpatterns = [
     # Envio de email
     path('envio-email/', views.envio_email, name='envio_email'),
 
-    # Login e Logout bugado
+    # Login e Logout
     path('accounts/logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('accounts/login/', views.login_view, name='login'),
+
+    # Criar relatório de produtos
+    path('relatorio-produtos/', views.gerar_relatorio_produtos, name='relatorio_produtos'),
+    
+    # Criar relatório de alertas
+    path('relatorio-alertas/', views.gerar_relatorio_alertas, name='relatorio_alertas'),
 ]
+

@@ -29,7 +29,7 @@ class Fornecedor(models.Model):
 
 class Produto(models.Model):
     pro_id = models.AutoField(primary_key=True)
-    pro_nome = models.CharField(max_length=255)
+    pro_nome = models.CharField(max_length=255, unique=True)
     pro_quantidade = models.IntegerField()
     pro_codigo = models.CharField(max_length=255, unique=True)
     pro_descricao = models.TextField()
@@ -56,3 +56,7 @@ class Movimentacao(models.Model):
     mov_data = models.DateTimeField(auto_now_add=True)
     mov_pro_id = models.ForeignKey(Produto, on_delete=models.CASCADE)
     mov_usu_id = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
+class Notificacao(models.Model):
+    not_pro_id = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    not_mensagem = models.CharField(max_length=255, unique=True)

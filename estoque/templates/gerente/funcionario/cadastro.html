@@ -2,7 +2,7 @@
 {% load static %}
 {%block content%}
     <div class="container d-flex justify-content-center align-items-center login-page">
-        <div class="login-container">
+        <div class="login-container shadow m-0">
             <div class="login-icon">
                 <img src="{% static '/images/profile.png' %}" alt="User Icon">
             </div>
@@ -11,6 +11,7 @@
                 <input name='nome' type="text" class="form-control" placeholder="Nome">
                 <input name='email' type="email" class="form-control" placeholder="Email">
                 <input name='senha' type="password" class="form-control" placeholder="Senha">
+                <input type="hidden" name="csrfmiddlewaretoken" id="csrf_token" value="">
                 <button  action="{% url 'cadastro_funcionario' %}" type="submit" class="btn btn-primary rounded-pill w-100">Enviar</button>
                 {% csrf_token %}
             </form>

@@ -2,7 +2,6 @@ from django.contrib import admin
 from .models import *
 from django.contrib.auth.admin import UserAdmin
 
-# Register your models here.
 class CustomUsuarioAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
@@ -18,6 +17,11 @@ class CustomUsuarioAdmin(UserAdmin):
     list_display = ('username', 'email', 'usu_tipo', 'is_active', 'is_staff')
 
 admin.site.register(Usuario, CustomUsuarioAdmin)
+
+
+# Register your models here.
+
 admin.site.register(Fornecedor)
 admin.site.register(Produto)
 admin.site.register(Movimentacao)
+admin.site.register(Notificacao)

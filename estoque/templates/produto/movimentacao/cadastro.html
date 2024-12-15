@@ -1,9 +1,8 @@
-
 {%extends 'base_generic.html'%}
 {% load static %}
 {%block content%}
-<div class="d-flex justify-content-center align-items-center">
-    <div class="login-container">
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="login-container shadow m-0">
         <h2 class="login-title text-center form-header mb-4">Cadastro de Movimentação</h2>
         <form method="post">
             <div class="mb-3">
@@ -14,20 +13,20 @@
             </div>
             <div class="mb-3"> 
                 <label for="tipo">Tipo:</label>
-                <select name="tipo" id="tipo">
+                <select  class='form-select-sm' name="tipo" id="tipo">
                     <option value="entrada">Entrada</option>
                     <option value="saida">Saída</option>
                 </select>
             </div>
             <div class="mb-3"> 
                 <label for="pro_id">Produto:</label>
-                <select name="pro_id" id="pro_id">
+                <select  class='form-select-sm' name="pro_id" id="pro_id">
                     {% for item in produtos %}
                         <option value="{{item.pro_id}}">{{item.pro_nome}}</option>
                     {% endfor %}
                 </select>
             </div>
-            <button type="submit" action="{% url 'cadastro_movimentacao' %}" class="btn btn-primary btn-submit w-100 rounded-pill">Enviar</button>
+            <button type="submit" action="{% url 'cadastro_movimentacao' %}" class="btn btn-primary w-100 rounded-pill">Enviar</button>
             {% csrf_token %}
         </form>
     </div>

@@ -1,24 +1,23 @@
 {% extends 'base_generic.html' %}
 {% load static %}
 {% block content %}
-
+{% csrf_token %}
 {% if user.is_superuser  %}
-   <div class="container">
-        <div class="container-center">
+   <div>
+        <div class="container">
             <div style="padding: 10px 0px 10px 0px; color: #ff5b0f;">
-                <h3>Bem-vindo(a), gerente {{ request.user.first_name }}</h3>
+                <h3>Bem-vindo(a), gerente {{request.user.username}}</h3>
             </div>
 
             <div class="row">
-                <div class="col-md-6" style="margin-right: 0px;">
-                    <div class="card" style="width: 100%">
+                <div class="col-md-6 col-12" style="margin-right: 0px;">
+                    <div class="card mb-3" style="width: 100%">
                         <div class="card-body">
                           <h5 class="card-title">Relatório</h5>
-                          <li class="card-link"><a href="#">Gerar relatório de estoque</a></li>
+                          <li class="card-link m-0"><a href="{% url 'relatorio_alertas' %}">Gerar relatório de alertas</a></li>
+                          <li class="card-link m-0"><a href="{% url 'relatorio_produtos' %}">Gerar Relatório PDF do Estoque</a></li>
                         </div>
                     </div>
-
-                    <br>
 
                     <div class="card" style="width: 100%">
                         <div class="card-body" style="display: flex;">
@@ -28,14 +27,14 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 pr-0" style="margin-right: 0px !important;">
+                <div class="col-md-6 mt-md-0 mt-3 col-12 pr-0" style="margin-right: 0px !important;">
                     <div class="card" style="height: 100%;">
                         <div class="card-body">
                           <h5 class="card-title">Alertas</h5>
                           <ul>
-                            <li><a href="#">Alerta 1</a></li>
-                            <li><a href="#">Alerta 2</a></li>
-                            <li><a href="#">Alerta 3</a></li>
+                            {% for item in notificacoes %}
+                                <li>{{item.not_mensagem}}</li>
+                            {% endfor %}
                           </ul>
                         </div>
                     </div>
@@ -47,7 +46,7 @@
 <div>
     <div class="container">
         <div style="padding: 10px 0px 10px 0px; color: #ff5b0f;">
-            <h3>Bem-vindo(a), funcionário {{ request.user.first_name }}</h3>
+            <h3>Bem-vindo(a), funcionário {{request.user.username}}</h3>
         </div>
 
         <div class="row">
@@ -56,9 +55,9 @@
                         <div class="card-body">
                           <h5 class="card-title">Alertas</h5>
                           <ul>
-                            <li><a href="#">Alerta 1</a></li>
-                            <li><a href="#">Alerta 2</a></li>
-                            <li><a href="#">Alerta 3</a></li>
+                            {% for item in notificacoes %}
+                                <li>{{item.not_mensagem}}</li>
+                            {% endfor %}
                           </ul>
                         </div>
                     </div>
@@ -75,9 +74,6 @@
         </div>   
     </div>
 </div>
-
-<footer class="footer d-flex justify-content-center align-items-center ">
-    <p class="text-white mb-0"></p>
 {%endif%}
 
 {% endblock %}

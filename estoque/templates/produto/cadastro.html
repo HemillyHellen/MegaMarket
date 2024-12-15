@@ -1,9 +1,9 @@
 {%extends 'base_generic.html'%}
 {% load static %}
 {%block content%}
-<div class="d-flex justify-content-center align-items-center">
-    <div class="login-container mb-5">
-        <h2 class="login-title text-center">Cadastro de Produto</h2>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="login-container shadow m-0">
+        <h2 class="login-title text-center form-header mb-4">Cadastro de Produto</h2>
         <form method="post">
             <div class="mb-3">
                 <input name='nome' type="text" class="form-control rounded-pill" placeholder="Nome">
@@ -16,6 +16,9 @@
             </div>
             <div class="mb-3">
                 <input name='categoria' type="text" class="form-control rounded-pill" placeholder="Categoria">
+            </div>
+            <div class="mb-3">
+                <input name='quantidade' type="text" class="form-control rounded-pill" placeholder="Quantidade">
             </div>
             <div class="mb-3">
                 <input name='qtdMinima' type="text" class="form-control rounded-pill" placeholder="Quantidade Mínima">
@@ -34,13 +37,13 @@
             </div>
             <div class="mb-3"> 
                 <label for="select">Fornecedor:</label>
-                <select name="fornecedor" id="select">
+                <select  class='form-select-sm' name="fornecedor" id="select">
                     {% for item in fornecedores %}
                         <option value="{{item.for_id}}">{{item.for_nome}}</option>
                     {% endfor %}
                 </select>
             </div>
-            <button action='{% url "cadastro_produto" %}' type="submit" class="btn btn-primary btn-submit w-100 rounded-pill">Enviar</button>
+            <button action='{% url "cadastro_produto" %}' type="submit" class="btn btn-primary w-100 rounded-pill">Enviar</button>
             {% csrf_token %}
         </form>
     </div>

@@ -17,7 +17,6 @@
             <div class="mb-3">
                 <input name='email' type="email" class="form-control rounded-pill" placeholder="Email">
             </div>
-            <input type='hidden' value='1' name='ger_id'>
             <button action='{% url "cadastro_fornecedor" %}' type="submit" class="btn btn-primary btn-submit w-100 rounded-pill">Enviar</button>
             {% csrf_token %}
         </form>

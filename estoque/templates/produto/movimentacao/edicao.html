@@ -1,20 +1,42 @@
 {%extends 'base_generic.html'%}
 {% load static %}
 {%block content%}
+<script>
+    function formController(){
+        if (document.getElementById('seletor').value == 'mov_tipo') {
+            document.getElementById('tipo').style.display = 'block'
+            document.getElementById('input').style.display = 'none'
+            document.getElementById('tipo').disabled = false
+            document.getElementById('input').disabled = true
+        } else {
+            document.getElementById('tipo').style.display = 'none'
+            document.getElementById('input').style.display = 'block'
+            document.getElementById('tipo').disabled = true
+            document.getElementById('input').disabled = false
+            if (document.getElementById('seletor').value == 'mov_data') {
+                document.getElementById('input').type = 'date'
+            }
+        }
+    }
+</script>
 <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="login-container">
-        <h2 class="login-title text-center form-header mb-2">Edição de Movimentação</h2>
-        <form method="POST">
+    <div class="login-container shadow m-0">
+        <h2 class="login-title text-center form-header mb-4">Edição de Movimentação</h2>
+        <form style='display: flex;flex-direction: column;align-items: center;' method="POST">
             <label for="campo">Selecione o campo:</label>
-                <select name="column" id="campo">
-                    <option value="mov_tipo">Nome</option>
-                    <option value="email">E-mail</option>
+                <select  class='form-select-sm' id='seletor' onchange="formController()" name="column" id="campo">
+                    <option value="mov_tipo">Tipo</option>
+                    <option value="mov_quantidade">Quantidade</option>
+                    <option value="mov_data">Data</option>
                 </select>
-                <div class="mb-2">
-                    <label for="campo2">Insira o novo valor:</label>
-                    <input name="value" id="campo2">
-                </div>
-            <button action='{% url "edicao_movimentacao" movimentacao.mov_id %}' type="submit" class="btn btn-primary btn-submit w-100 rounded-pill">Enviar</button>
+            <label>Insira o novo valor:</label>
+            
+            <select  class='form-select-sm mb-2' id='tipo' name="value">
+                <option value="entrada">Entrada</option>
+                <option value="saida">Saída</option>
+            </select>
+            <input name="value" class='mb-2' id="input" style="display:none" disabled>
+            <button action='{% url "edicao_movimentacao" movimentacao.mov_id %}' type="submit" class="btn btn-primary w-100 rounded-pill">Enviar</button>
             {% csrf_token %}
         </form>
     </div>

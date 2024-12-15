@@ -2,20 +2,18 @@
 {% load static %}
 {%block content%}
     <div class="container d-flex justify-content-center align-items-center login-page">
-        <div class="login-container">
+        <div class="login-container m-0 shadow">
             <h2 class="login-title">Enviar e-mail</h2>
             <div class="login-icon">
-        </div>
+            </div>
+            
             <form method="post">
-                <div class="mb-2">
-                    <label for="campo" class="">Destinatário:</label>
-                    <select name="email" id="campo">
-                        {% for item in users %}
-                            <option value="{{item.email}}">{{item.username}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                
+                <label class='mb-2' for="campo">Destinatário:</label>
+                <select class='form-select-sm' name="email" id="campo">
+                    {% for item in users %}
+                        <option value="{{item.email}}">{{item.username}}</option>
+                    {% endfor %}
+                </select></br>
                 <label for="campo2">Insira o conteúdo do email:</label>
                 <input name='descricao' id="campo2" type="description" class="form-control" placeholder="Descriçao">
                 <button type="submit" action="{% url 'envio_email' %}" class="btn btn-primary w-100 rounded-pill">Enviar</button>
