@@ -46,10 +46,11 @@
                     {% endfor %}
                 </table>
             </div>
-            
+            {% if user.is_superuser %}
             <div class="d-flex justify-content-center">
                 <a href="{% url 'relatorio_produtos' %}" class="btn bg-success text-white">Gerar Relatório PDF</a>
             </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
